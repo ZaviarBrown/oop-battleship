@@ -13,16 +13,16 @@ class Board {
     let totalSpaces = this.numRows * this.numCols;
     let shipArr = [];
     while (shipArr.length < this.numShips) {
-      let ship = Math.floor(Math.random() * (totalSpaces - 1) +1);
+      let ship = Math.floor(Math.random() * (totalSpaces)) + 1;
       if (!shipArr.includes(ship)) {
         shipArr.push(ship);
       }
     }
     let counter = 0;
     const gridArr = [];
-    for (let i = 0; i < this.numRows; i++) {
+    for (let i = 0; i < this.numRows ; i++) {
       gridArr.push([]);
-      for (let j = 0; j <= this.numCols - 1; j++) {
+      for (let j = 0; j < this.numCols; j++) {
         counter++;
         if (shipArr.includes(counter)) {
           gridArr[i].push('s');
@@ -63,22 +63,52 @@ class Board {
   isValidMove(pos) {
     // TODO: Take in an attack position (in the form of an array [row, col]) and
     // return true if the position is a valid move.
+    let row = pos[0];
+    let column = pos[1];
+    if (row > this.numRows || column > this.numCols) {
+      return false;
+    } else if (this.grid[row][column] === "x" || this.grid[row][column] === "h") {
+        return false;
+    } else {
+      return true;
+    }
+
   }
 
   isGameOver() {
     // TODO: Return true if the game is over (when all ships are hit).
+    let gameEnd = true;
+    this.grid.forEach(element => {
+      for(let i = 0; i < element.length; i++) {
+        if (element[i] === "s") {
+          console.log(element[i]);
+          gameEnd = false;
+        };
+      }
+    });
+    return gameEnd;
   }
 
-  attack() {
+  attack(pos) {
     // TODO: Take in an attack position in the form of an array, [row, col], as
     // a parameter. Update this.grid depending on if the position is an empty
     // space or a damaged ship.
+    let row = pos[0];
+    let column = pos[1];
+    if (this.grid[row][column] === "s") {
+      this.grid[row][column] = "h";
+    } else {
+      this.grid[row][column] = "x";
+    }
+    this.display();
   }
+
 }
 
-let testBoard = new Board(10, 10, 5);
+let testBoard = new Board(4, 4, 15);
 // testBoard.populateGrid();
 testBoard.display();
 testBoard.count();
+testBoard.attack([1, 2]);
 
 module.exports = Board;
