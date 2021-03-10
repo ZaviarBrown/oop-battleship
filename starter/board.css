@@ -1,0 +1,48 @@
+#game-board #top-grid {
+    display: grid;
+    border: 3px solid limegreen;
+    width: 40vh;
+    height: 40vh;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    background: black;
+    margin: auto;
+    margin-bottom: 5px;
+    grid-auto-flow: row;
+    text-align: center;
+
+}
+
+#game-board #bottom-grid {
+    display: grid;
+    border: 3px solid cyan;
+    width: 40vh;
+    height: 40vh;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    background: blue;
+    margin: auto;
+    grid-auto-flow: row;
+    text-align: center;
+
+}
+
+#game-board #top-grid .top-cell {
+    border: 3px solid limegreen;
+    color: limegreen;
+
+}
+
+#game-board #bottom-grid .bottom-cell {
+    border: 3px solid cyan;
+    color: cyan;
+}
+
+.hit {
+    background-color: red;
+
+}
+
+.miss {
+    background-color: gray;
+}
